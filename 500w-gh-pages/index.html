@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="datura"/>
+    <meta name="copyright" content="版权"/>
+    <meta name="description" content="描述"/>
+    <meta name="keywords" content="关键字"/>
+    <link rel="stylesheet" href="css/base.css" />
+    <title>双色球 | Datura</title>
+    <style>
+        *{margin: 0;padding: 0}
+        ul {
+            width: 500px;
+            margin: 50px auto;
+        }
+        li{
+            list-style: none;
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+            float: left;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+            /*animation: myRotate 0.5s linear 3;*/
+        }
+        .anm{
+            animation: myRotate 0.5s linear 3;
+        }
+        li:nth-last-of-type(1){
+            background: blue;
+        }
+        input{
+            margin-top: 11px;
+            cursor: pointer;
+        }
+        @keyframes myRotate {
+            0%{
+                transform: rotate(0deg);
+            }
+            25%{
+                transform: rotate(90deg);
+            }
+            50%{
+                transform: rotate(180deg);
+            }
+            75%{
+                transform: rotate(270deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+    </style>
+    <script>
+        function rnd(n,m){
+            return parseInt(Math.random()*(m-n)+n);
+        }
+        function findInArr(num,arr){
+            for(var i=0;i<arr.length;i++){
+                if( arr[i] == num ){
+                    return true;
+                }
+            }
+            return false;
+        }
+        function toDou(n){
+            return n<10?'0'+n:''+n;
+        }
+        window.onload = function (){
+            var oBtn = document.getElementById('btn');
+            var aLi = document.getElementsByTagName('li');
+            var timer = null;
+            var str = '';
+            str.slice()
+            oBtn.onclick = function (){
+                for (var i=0;i<aLi.length;i++){
+                    aLi[i].className = 'anm';
+                }
+                clearInterval(timer);
+                var num1 = 0;
+                timer = setInterval(function(){
+                    if (num1 >10){
+                        clearInterval(timer);
+                    }
+                    var arr = [];
+                    while (arr.length<6){
+                        var num = rnd(1,34);
+                        if(findInArr(num,arr)){
+                            i--;
+                        }else {
+                            arr.push(toDou(num));
+                        }
+                    }
+                    var  num2 = rnd(1,16);
+                    arr.push(toDou(num2));
+                    for(var i=0;i<aLi.length;i++){
+                        aLi[i].innerHTML = arr[i];
+                    }
+                    num1++;
+                },50);
+                 setTimeout(function(){
+                    for (var i=0;i<aLi.length;i++){
+                        aLi[i].className = '';
+                    }
+                },500);
+            };
+        };
+    </script>
+</head>
+<body>
+
+<ul>
+    <li>02</li>
+    <li>22</li>
+    <li>03</li>
+    <li>15</li>
+    <li>01</li>
+    <li>07</li>
+    <li>10</li>
+</ul>
+<input type="button" value="换一组" id="btn" />
+</body>
+</html>
