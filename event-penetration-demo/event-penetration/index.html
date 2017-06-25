@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="datura"/>
+    <meta name="copyright" content="版权"/>
+    <meta name="description" content="描述"/>
+    <meta name="keywords" content="关键字"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0}
+        .top-element{
+            width: 200px;
+            height: 200px;
+            background-color: lawngreen;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .bottom-element{
+            width: 100%;
+            height: 200px;
+            background-color: blue;
+        }
+    </style>
+    <script src="hammer.js"></script>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="top-element" @dblclick="top"></div>
+        <div class="bottom-element" @click="bottom"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded',function () {
+            console.log('DOMContentLoaded');
+            var vm = new Vue({
+                el:'.app',
+                data:{
+                    msg:'hello'
+                },
+                methods:{
+                    top(){
+                        alert('我是上层')
+                    },
+                    bottom(){
+                        alert('我是下层')
+                    }
+                }
+            });
+        },false);
+    </script>
+</body>
+
+</html>
